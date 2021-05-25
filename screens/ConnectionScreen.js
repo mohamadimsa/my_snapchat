@@ -1,3 +1,4 @@
+import axios from "axios";
 import React,{useState} from "react";
 import {View, Text, Stylesheet,TextInput, Button} from "react-native" ;
 
@@ -6,8 +7,19 @@ const ConnectionScreen = (props) => {
     const [Email, setEmail] = useState("");
     const [Psw, setPsw] = useState("");
     function test() {    
-       
-        console.log('Le lien a été cliqué.');
+         
+        var datas ={
+          "email" : "petubrt@gmail.com",
+          "password" : "okok"
+      }
+        axios.post(`https://snapi-wac.herokuapp.com/connection`, { datas })
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+    
+
+        
     }
    
         
@@ -26,11 +38,7 @@ const ConnectionScreen = (props) => {
       <Button
         title="Se connecter"
        
-        onPress={(e) => 
-          
-            test()
-  
-        }
+        onPress={test()}
       />
     </View>
 
