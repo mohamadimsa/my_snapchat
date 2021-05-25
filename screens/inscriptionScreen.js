@@ -1,12 +1,84 @@
-import React from "react";
-import {View, Text, Stylesheet} from "react-native" ;
 
+import { StyleSheet,View, Text,KeyboardAvoidingView, Keyboard, TouchableOpacity,Stylesheet,ScrollView} from "react-native" ;
+import React, {useState, createRef} from 'react';
+import { TextInput } from "react-native";
+import axios from 'axios'
 const InscriptionScreen = (props) => {
+    const [Password, setPassword] = useState('');
+    const [Email, setEmail] = useState('');
+
+    const emailInputRef = createRef();
+    const passwordInputRef = createRef();
+
+
+
+    const handleSubmitButton = () => {
+        if (!Password) {
+          alert('Please fill password');
+          return;
+        }
+        if (!Email) {
+          alert('Please fill Email');
+          return;
+        }
+        var dataToSend = {
+            email: Email,
+            password: Password,
+          };
+          axios({ method: 'post', url: 'https://snapi-wac.herokuapp.com/inscription', data: dataToSend }) .then(function (response) { console.log(response); }) .catch(function (error) { console.log(error); });
+
+
+    }
     return(
         <View>
-            <Text>register screen</Text>
-        </View>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{
+            justifyContent: 'center',
+            alignContent: 'center',
+          }}>
+          <KeyboardAvoidingView enabled>
+            <View>
+              <TextInput
+                onChangeText={(Email) => setEmail(Email)}
+                underlineColorAndroid="#f000"
+                placeholder="Enter Email"
+                placeholderTextColor="#8b9cb5"
+                returnKeyType="next"
+                onSubmitEditing={() =>
+                    passwordInputRef.current &&
+                    passwordInputRef.current.focus()
+                  }
+                blurOnSubmit={false}
+              />
+            </View>
+            <View>
+              <TextInput
+                onChangeText={(Password) => setPassword(Password)}
+                underlineColorAndroid="#f000"
+                placeholder="Enter password"
+                placeholderTextColor="#8b9cb5"
+                secureTextEntry={true}
+                ref={passwordInputRef}
+                onSubmitEditing={Keyboard.dismiss}
+                blurOnSubmit={false}
+              />
+            </View>
+            <TouchableOpacity
+            onPress={handleSubmitButton}>
+              <Text>REGISTER</Text>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </View>
     )
+    const styles = StyleSheet.create({
+        input: {
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+        },
+      });
 }
 
 
