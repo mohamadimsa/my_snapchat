@@ -51,7 +51,7 @@ const ConnectionScreen = (props) => {
       AsyncStorage.setItem('tok',token)
       .then(()=>{
         console.log("ok s  ===")
-        props.setIslogin(true); 
+       
         props.navigation.navigate("Home",{email: Email, token: reponse.data.data.token})
       })        
     })

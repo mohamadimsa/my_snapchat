@@ -13,8 +13,9 @@ const HomeScreen = (props) => {
           // read error
         }
         if(values[0][1] !=null && values[1][1] !=null){
-            props.setIslogin(true);
-        props.navigation.navigate("auth",{email:values[0][1] , token: values[1][1]})
+            props.setData(values)
+           props.setIslogin(true);
+        //props.navigation.navigate("auth",{email:values[0][1] , token: values[1][1]})
         }
       
 
@@ -22,6 +23,7 @@ const HomeScreen = (props) => {
         // example console.log output:
         // [ ['@MyApp_user', 'myUserValue'], ['@MyApp_key', 'myKeyValue'] ]
       }
+      
       getMultiple()
 
     const goTo = ()=> {

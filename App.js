@@ -7,22 +7,35 @@ import HomeScreen from './screens/HomeScreen';
 import InscriptionScreen from './screens/inscriptionScreen';
 import ConnectionScreen from './screens/ConnectionScreen';
 import ProfilScreen from './screens/ProfilScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function App(props) {
 
   const [Islogin, setIslogin] = useState(false);
+  const [data, setData] = useState(null);
   console.log(Islogin+" est auth");
+  const logout = ()=>{
+    try {
+      AsyncStorage.multiRemove(["email","token"])
+      setIslogin(false);
+      
+    } catch (error) {
+      
+    }
+  }
+
+
   return (
     
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="login">
+    <Stack.Navigator >
        {Islogin ? (
           <>
-         <Stack.Screen name="auth" component={ProfilScreen}/>
+         <Stack.Screen name="auth">{props => <ProfilScreen {...props} data={data} logout={logout} />}</Stack.Screen>
           </>
         ) : (
-          <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
+          <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin} setData={setData} />}</Stack.Screen>
         )}
       <Stack.Screen name="Login">{props => <ConnectionScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
       <Stack.Screen name="Register" component={InscriptionScreen} />

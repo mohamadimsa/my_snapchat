@@ -1,5 +1,5 @@
 import React  from "react";
-import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View , TouchableOpacity,Button} from 'react-native';
 
 const ProfilScreen = (props) => {
     const getData = async (key) => {
@@ -13,14 +13,21 @@ const ProfilScreen = (props) => {
         }
       }
     
+    
       
     
-    getData("test")
-  
+    console.log(props.data);
     return(
 
         <View>
             <Text>user connect profil</Text>
+            <TouchableOpacity>
+            <Button
+        title="Se deco"
+       
+        onPress={() =>props.logout()}
+      />
+            </TouchableOpacity>
       
         </View>
     )
