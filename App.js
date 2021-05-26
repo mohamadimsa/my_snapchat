@@ -16,11 +16,18 @@ export default function App(props) {
   return (
     
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="home">
-      <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
-      <Stack.Screen name="Register" component={InscriptionScreen} />
+    <Stack.Navigator initialRouteName="login">
+       {Islogin ? (
+          <>
+         <Stack.Screen name="auth" component={ProfilScreen}/>
+          </>
+        ) : (
+          <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
+        )}
       <Stack.Screen name="Login">{props => <ConnectionScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
-      <Stack.Screen name="auth" component={ProfilScreen}/>
+      <Stack.Screen name="Register" component={InscriptionScreen} />
+    
+      
     </Stack.Navigator>
   </NavigationContainer>
   );
