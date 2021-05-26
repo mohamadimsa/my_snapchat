@@ -13,7 +13,8 @@ const HomeScreen = (props) => {
           // read error
         }
         if(values[0][1] !=null && values[1][1] !=null){
-        props.navigation.navigate("profil",{email:values[0][1] , token: values[1][1]})
+            props.setIslogin(true);
+        props.navigation.navigate("auth",{email:values[0][1] , token: values[1][1]})
         }
       
 
@@ -62,7 +63,7 @@ const HomeScreen = (props) => {
     if (props.route.params != undefined) {
         const param = ()=>{
             var paramd =  props.route.params
-           
+            
         console.log(paramd)
           setEmail(paramd.email);
           setToken(paramd.token);

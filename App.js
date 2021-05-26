@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React ,{useState, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer}from "@react-navigation/native"
 import{createStackNavigator}from "@react-navigation/stack";
@@ -10,14 +9,18 @@ import ConnectionScreen from './screens/ConnectionScreen';
 import ProfilScreen from './screens/ProfilScreen';
 
 
-export default function App() {
+export default function App(props) {
+
+  const [Islogin, setIslogin] = useState(false);
+  console.log(Islogin+" est auth");
   return (
+    
     <NavigationContainer>
     <Stack.Navigator initialRouteName="home">
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
       <Stack.Screen name="Register" component={InscriptionScreen} />
-      <Stack.Screen name="Login" component={ConnectionScreen} />
-      <Stack.Screen name="profil" component={ProfilScreen} />
+      <Stack.Screen name="Login">{props => <ConnectionScreen {...props} setIslogin={setIslogin}/>}</Stack.Screen>
+      <Stack.Screen name="auth" component={ProfilScreen}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
