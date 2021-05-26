@@ -1,4 +1,4 @@
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet,View, Text,KeyboardAvoidingView, Keyboard, TouchableOpacity,Stylesheet,ScrollView} from "react-native" ;
 import React, {useState, createRef} from 'react';
 import { TextInput } from "react-native";
@@ -12,20 +12,16 @@ const InscriptionScreen = (props) => {
 
     const getData = async () => {
         try {
-          const value = await AsyncStorage.getItem('test')
-          if(value !== null) {
-            console.log("la cle storage :ok")
-          }else{
-            console.log("la cle storage :ko")
-          }
+          const value = await AsyncStorage.getItem('test',(e,res)=>{
+                  console.log(e)
+          });
+         
         } catch(e) {
-          console.log("la cle storage :ko")
+          console.log("la cle storage :ko error")
         }
       }
-    
-      
-    
-    getData()
+
+      getData()
 
     const handleSubmitButton = () => {
         if (!Password) {

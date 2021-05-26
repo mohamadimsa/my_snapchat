@@ -7,6 +7,7 @@ const Stack = createStackNavigator();
 import HomeScreen from './screens/HomeScreen';
 import InscriptionScreen from './screens/inscriptionScreen';
 import ConnectionScreen from './screens/ConnectionScreen';
+import ProfilScreen from './screens/ProfilScreen';
 
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Register" component={InscriptionScreen} />
       <Stack.Screen name="Login" component={ConnectionScreen} />
+      <Stack.Screen name="profil" component={ProfilScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );

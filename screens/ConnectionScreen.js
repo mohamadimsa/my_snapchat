@@ -7,23 +7,17 @@ import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
 const ConnectionScreen = (props) => {
 
-  
-  const getData = async () => {
+
+  const getData = async (key) => {
     try {
-      const value = await AsyncStorage.getItem('test')
-      if(value !== null) {
-        console.log("la cle storage :ok")
-      }else{
-        console.log("la cle storage :ko")
-      }
+      const value = await AsyncStorage.getItem(key,(e,res)=>{
+              console.log(res)
+      });
+     
     } catch(e) {
-      console.log("la cle storage :ko")
+      console.log("la cle storage :ko error")
     }
   }
-
-  
-
-getData()
 
   
     const [Email, setEmail] = useState("");
@@ -57,7 +51,7 @@ getData()
       AsyncStorage.setItem('tok',token)
       .then(()=>{
         console.log("ok s  ===")
-        console.log(getValue);
+        props.navigation.navigate("Home",{email: Email, token: reponse.data.data.token})
       })        
     })
     .catch(function (erreur) {
