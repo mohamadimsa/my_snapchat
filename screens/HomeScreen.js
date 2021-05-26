@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View , TouchableOpacity, Touchable} from 'react-native';
+import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
 
 const HomeScreen = (props) => {
     const goTo = ()=> {
