@@ -10,7 +10,22 @@ const InscriptionScreen = (props) => {
     const emailInputRef = createRef();
     const passwordInputRef = createRef();
 
-
+    const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('test')
+          if(value !== null) {
+            console.log("la cle storage :ok")
+          }else{
+            console.log("la cle storage :ko")
+          }
+        } catch(e) {
+          console.log("la cle storage :ko")
+        }
+      }
+    
+      
+    
+    getData()
 
     const handleSubmitButton = () => {
         if (!Password) {
