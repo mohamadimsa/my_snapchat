@@ -12,7 +12,9 @@ const ProfilScreen = (props) => {
           console.log("la cle storage :ko error")
         }
       }
-    
+      const goto = ()=> {
+        props.navigation.navigate("Camera");
+    }
     
       
     
@@ -28,7 +30,11 @@ const ProfilScreen = (props) => {
         onPress={() =>props.logout()}
       />
             </TouchableOpacity>
-      
+            <TouchableOpacity onPress={goto}>
+                <View>
+                  <Text>Camera</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     )
 }

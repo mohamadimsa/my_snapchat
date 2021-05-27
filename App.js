@@ -6,6 +6,7 @@ const Stack = createStackNavigator();
 import HomeScreen from './screens/HomeScreen';
 import InscriptionScreen from './screens/inscriptionScreen';
 import ConnectionScreen from './screens/ConnectionScreen';
+import CamScreen from './screens/CamScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -33,6 +34,7 @@ export default function App(props) {
        {Islogin ? (
           <>
          <Stack.Screen name="auth">{props => <ProfilScreen {...props} data={data} logout={logout} />}</Stack.Screen>
+         <Stack.Screen name="Camera" component={CamScreen} />
           </>
         ) : (
           <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin} setData={setData} />}</Stack.Screen>

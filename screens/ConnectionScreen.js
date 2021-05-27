@@ -78,7 +78,6 @@ const ConnectionScreen = (props) => {
       />
       <Button
         title="Se connecter"
-       
         onPress={test}
       />
     </View>
