@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect,createRef } from 'react';
-import {StyleSheet,Dimensions,View,Text,TouchableOpacity, Modal } from 'react-native';
+import {Button,StyleSheet,Dimensions,View,Text,TouchableOpacity, Modal,Image } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 
 //pour la dimmension du capture bouton 
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
 
 const CamScreen = (props) => {
+  const [image, setImage] = useState(null);
   const cameraRef = useRef();
   const [hasPermission, setHasPermission] = useState(null);
 
@@ -18,8 +21,33 @@ const CamScreen = (props) => {
 
   useEffect(() => {
     onHandlePermission();
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, on abesoin de ta permission pour acceder au camera!');
+        }
+      }
+    })();
   }, []);
 
+
+//pour la galerie
+
+const pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  console.log(result);
+
+  if (!result.cancelled) {
+    setImage(result.uri);
+  }
+}
   //pour annuler une photo
 
   const cancelPreview = async () => {
@@ -82,6 +110,12 @@ const CamScreen = (props) => {
       color: '#fff'
     },
       //css qui permet de faire facecamera
+      galery:{
+        top: -0,
+        right: 190,
+        height: 50,
+        width: 50
+      },
       facecam:{
         top: -680,
         right: 90,
@@ -144,15 +178,18 @@ const CamScreen = (props) => {
           {!isPreview && (
             <View style={styles.bottom}>
               <TouchableOpacity   disabled={!isCameraReady} onPress={switchCamera}>
-                <MaterialIcons name='flip-camera-ios' size={28} color='white' style={styles.facecam}/>
+                <MaterialIcons name='flip-camera-android' size={28} color='white' style={styles.facecam}/>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.7}
                 disabled={!isCameraReady}
                 onPress={capture}
                 style={styles.capture}/>
-                
-            </View>
+                 <TouchableOpacity   disabled={!isCameraReady} onPress={pickImage}>
+                <MaterialIcons name='more-vert' size={28} color='white' style={styles.galery}/>
+                {image && <Image source={{ uri: image }} style={{ width: 600, height: 200 }} />}
+              </TouchableOpacity>
+              </View>
             
         
 
