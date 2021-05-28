@@ -49,7 +49,7 @@ const pickImage = async () => {
     setImage(result.uri);
     const dataToSend = {
         duration: "1",
-        // a changer pour 
+        // a changer pou           r 
         to: "petubrt@gmail.com",
         image: result.uri
     };

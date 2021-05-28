@@ -15,6 +15,9 @@ const ProfilScreen = (props) => {
       const goto = ()=> {
         props.navigation.navigate("Camera");
     }
+    const gotomessage = ()=> {
+      props.navigation.navigate("message");
+  }
     
       
     
@@ -33,6 +36,13 @@ const ProfilScreen = (props) => {
             <TouchableOpacity onPress={goto}>
                 <View>
                   <Text>Camera</Text>
+
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={gotomessage}>
+                <View>
+                  <Text>Message</Text>
+                  
                 </View>
             </TouchableOpacity>
         </View>
