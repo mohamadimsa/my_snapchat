@@ -3,6 +3,7 @@ import {Button,StyleSheet,Dimensions,View,Text,TouchableOpacity, Modal,Image } f
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import axios from 'axios';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 
@@ -42,10 +43,29 @@ const pickImage = async () => {
     quality: 1,
   });
 
-  console.log(result);
+  
 
   if (!result.cancelled) {
     setImage(result.uri);
+    const dataToSend = {
+        duration: "1",
+        // a changer pour 
+        to: "petubrt@gmail.com",
+        image: result.uri
+    };
+    const formData = new FormData();
+    formData.append('file',dataToSend.image)
+    formData.append('to',dataToSend.to)
+    formData.append('duration',dataToSend.duration)
+  
+    axios({ method: 'post', url: 'https://snapi-wac.herokuapp.com/snap', data: formData ,
+     headers: {
+        'token': props.data[1][1],
+        'Content-Type': 'multipart/form-data'
+      }
+  
+  }) .then(function (response) { console.log(response); }) .catch(function (error) { console.log(error.response); });
+    
   }
 }
   //pour annuler une photo

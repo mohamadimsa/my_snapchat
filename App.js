@@ -34,7 +34,7 @@ export default function App(props) {
        {Islogin ? (
           <>
          <Stack.Screen name="auth">{props => <ProfilScreen {...props} data={data} logout={logout} />}</Stack.Screen>
-         <Stack.Screen name="Camera" component={CamScreen} />
+         <Stack.Screen name="Camera">{props => <CamScreen {...props} data={data}/>}</Stack.Screen>
           </>
         ) : (
           <Stack.Screen name="Home">{props => <HomeScreen {...props} setIslogin={setIslogin} setData={setData} />}</Stack.Screen>
