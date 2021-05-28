@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect,createRef } from 'react';
-import {Button,StyleSheet,Dimensions,View,Text,TouchableOpacity, Modal,Image } from 'react-native';
+import {Button,StyleSheet,Dimensions,View,Text,TouchableOpacity, Modal,Image,  Platform,Alert } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import axios from 'axios';
+import CameraRoll from "expo-cameraroll";
+import * as MediaLibrary from 'expo-media-library';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 
@@ -11,6 +13,7 @@ const WINDOW_HEIGHT = Dimensions.get('window').height;
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
 
 const CamScreen = (props) => {
+  const [IMG, setIMG] = useState(null);
   const [image, setImage] = useState(null);
   const cameraRef = useRef();
   const [hasPermission, setHasPermission] = useState(null);
@@ -79,15 +82,20 @@ const pickImage = async () => {
   const capture = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.7, base64: true };
-      const filmer = await cameraRef.current.takePictureAsync(options);
-      const source = filmer.base64;
-  
-      if (source) {
-        await cameraRef.current.pausePreview();
-        setIsPreview(true);
-      }
+      const filmer = await cameraRef.current.takePictureAsync(options).then(function (data) { 
+        if (data) {
+           cameraRef.current.pausePreview();
+          setIsPreview(true)
+              setIMG(data.uri);
+          
+        }
+         });
     }
   };
+  const save =async()=>{
+    MediaLibrary.saveToLibraryAsync(IMG),
+    console.log('photo', IMG);
+  }
 
   //pour la permission
 
@@ -164,7 +172,7 @@ const pickImage = async () => {
       },
       closeButton: {
         position: 'absolute',
-        top: 35,
+        top: 55,
         right: 20,
         height: 50,
         width: 50,
@@ -172,6 +180,12 @@ const pickImage = async () => {
         justifyContent: 'center',
         alignItems: 'center',
         opacity: 0.7
+      },
+      save:{
+      top:-30,
+        height: 100,
+        width: 100,
+        right: 300,
       }
   });
 
@@ -187,13 +201,18 @@ const pickImage = async () => {
         />
         <View style={styles.container}>
         {isPreview && (
+          
                 <TouchableOpacity
                 onPress={cancelPreview}
                 style={styles.closeButton}
-                activeOpacity={0.7}
-                >
+                activeOpacity={0.7}>
                 <AntDesign name='close' size={32} color='#fff' />
+                <MaterialIcons name='save' size={28} color='white'style={styles.save}
+      onPress={save}
+      />
                 </TouchableOpacity>
+                
+                
             )}
           {!isPreview && (
             <View style={styles.bottom}>
