@@ -50,7 +50,7 @@ const pickImage = async () => {
     const dataToSend = {
         duration: "1",
         // a changer pou           r 
-        to: "petubrt@gmail.com",
+        to: "test@hotmail.com",
         image: result.uri
     };
     const formData = new FormData();

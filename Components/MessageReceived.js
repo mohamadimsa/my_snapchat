@@ -9,13 +9,14 @@ const MessageReceived = (props)=>{
 
     return(
         <View style={style.blockPrincipal}>
+            <TouchableOpacity >
             <View style={style.block}>
                  <Icon style={style.square} name="square"/>
-                 <View style={style.email}>
-                 <Text >{props.form}</Text>
+                 <View style={style.email}> 
+                 <Text >{props.from}</Text>
                  </View>
-                 
             </View>
+        </TouchableOpacity>
 
         </View>
     )

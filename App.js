@@ -16,7 +16,7 @@ export default function App(props) {
 
   const [Islogin, setIslogin] = useState(false);
   const [data, setData] = useState(null);
-  console.log(Islogin+" est auth");
+  console.log("Utilisateur auth : "+Islogin);
   const logout = ()=>{
     try {
       AsyncStorage.multiRemove(["email","token"])

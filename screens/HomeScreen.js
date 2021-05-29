@@ -37,7 +37,7 @@ const HomeScreen = (props) => {
     const setEmail = async (value) => {
         try {
           await AsyncStorage.setItem('email', value)
-          console.log("entregistrement email : "+value+" : OK")
+          console.log("Info user email : "+value)
         } catch (e) {
             console.log("entregistrement email : "+value+" : KO")
         }
@@ -46,7 +46,7 @@ const HomeScreen = (props) => {
     const setToken = async (value) => {
         try {
           await AsyncStorage.setItem('token', value)
-          console.log("entregistrement token  : "+value+" : OK")
+          console.log("token user  : "+value+" : OK")
           
         } catch (e) {
             console.log("entregistrement token  : "+value+" : KO")
@@ -54,19 +54,10 @@ const HomeScreen = (props) => {
       }
 
 
-      
-      
-   
-      
-      
-
-    
-
     if (props.route.params != undefined) {
         const param = ()=>{
             var paramd =  props.route.params
             
-        console.log(paramd)
           setEmail(paramd.email);
           setToken(paramd.token);
             
