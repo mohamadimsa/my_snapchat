@@ -2,23 +2,15 @@ import React  from "react";
 import { StyleSheet, Text, View , TouchableOpacity,Button} from 'react-native';
 
 const ProfilScreen = (props) => {
-    const getData = async (key) => {
-        try {
-          const value = await AsyncStorage.getItem(key,(e,res)=>{
-                  console.log(res)
-          });
-         
-        } catch(e) {
-          console.log("la cle storage :ko error")
-        }
-      }
+ 
       const goto = ()=> {
         props.navigation.navigate("Camera");
     }
+    const gotomessage = ()=> {
+      props.navigation.navigate("message");
+  }
     
       
-    
-    console.log(props.data);
     return(
 
         <View>
@@ -33,6 +25,13 @@ const ProfilScreen = (props) => {
             <TouchableOpacity onPress={goto}>
                 <View>
                   <Text>Camera</Text>
+
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={gotomessage}>
+                <View>
+                  <Text>Message</Text>
+                  
                 </View>
             </TouchableOpacity>
         </View>

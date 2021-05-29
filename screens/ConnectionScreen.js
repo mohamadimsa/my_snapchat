@@ -24,13 +24,7 @@ const ConnectionScreen = (props) => {
     const [Psw, setPsw] = useState("");
     const [token, settoken] = useState("");
     
-    const getValue = AsyncStorage.getItem("tok",(e,result)=>{
-        if(result != null){
-          console.log(result)
-       
-      }
-      else{return null}
-      })
+  
 
   
 
@@ -50,8 +44,6 @@ const ConnectionScreen = (props) => {
       
       AsyncStorage.setItem('tok',token)
       .then(()=>{
-        console.log("ok s  ===")
-       
         props.navigation.navigate("Home",{email: Email, token: reponse.data.data.token})
       })        
     })
