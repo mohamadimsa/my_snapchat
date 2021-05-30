@@ -40,8 +40,40 @@ const InscriptionScreen = (props) => {
 
 
     }
+    const styles = StyleSheet.create({
+      container:{
+        textAlign:"center",  
+        top:100, 
+           },
+        in:{
+          fontSize:20,
+          height:50,
+          textAlign:"center",
+          color:"#00BFFF",
+    
+        },
+        te:{
+          height:60,
+          backgroundColor: '#eaeaea',
+        },
+        submit:{
+          marginRight:40,
+          marginLeft:40,
+          marginTop:10,
+          paddingTop:20,
+          paddingBottom:20,
+          backgroundColor:'#68a0cf',
+          borderRadius:10,
+          borderWidth: 1,
+          borderColor: '#fff'
+        },
+        submitText:{
+            color:'#fff',
+            textAlign:'center',
+        }
+  })
     return(
-        <View>
+        <View style={styles.container}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{
@@ -49,8 +81,9 @@ const InscriptionScreen = (props) => {
             alignContent: 'center',
           }}>
           <KeyboardAvoidingView enabled>
-            <View>
-              <TextInput
+            <View >
+            <Text style={styles.in}>EMAIL</Text>
+              <TextInput style={styles.te}
                 onChangeText={(Email) => setEmail(Email)}
                 underlineColorAndroid="#f000"
                 placeholder="Enter Email"
@@ -63,8 +96,9 @@ const InscriptionScreen = (props) => {
                 blurOnSubmit={false}
               />
             </View>
-            <View>
-              <TextInput
+            <View >
+            <Text style={styles.in}>MOT DE PASSE</Text>
+              <TextInput style={styles.te}
                 onChangeText={(Password) => setPassword(Password)}
                 underlineColorAndroid="#f000"
                 placeholder="Enter password"
@@ -75,21 +109,15 @@ const InscriptionScreen = (props) => {
                 blurOnSubmit={false}
               />
             </View>
-            <TouchableOpacity
+            <TouchableOpacity style={styles.submit}
             onPress={handleSubmitButton}>
-              <Text>REGISTER</Text>
+              <Text  style={[styles.submitText]}>REGISTER</Text>
             </TouchableOpacity>
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
     )
-    const styles = StyleSheet.create({
-        input: {
-          height: 40,
-          margin: 12,
-          borderWidth: 1,
-        },
-      });
+
 }
 
 

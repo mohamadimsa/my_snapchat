@@ -1,6 +1,7 @@
 import React  from "react";
+import logo from '../assets/logo.jpeg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View , Image,TouchableOpacity} from 'react-native';
 
 const HomeScreen = (props) => {
       
@@ -67,20 +68,49 @@ const HomeScreen = (props) => {
     }
    
     
-    
+    const styles = StyleSheet.create({
+      container:{
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor:'#FFFF00',
+      },
+      bouton1:{
+        top:520,
+        backgroundColor:"#00BFFF",
+        height:60,
+      },
+      bouton2:{
+      top:400,
+      backgroundColor:"red",
+      height:60,
+      },
+      textbout:{
+        textAlign:"center",
+fontSize:40,
+color:"white",
+top:5,
+fontFamily: "Cochin",
+      },
+      Logo:{
+        width:170,
+        height:170,
+        top:140,
+        left:120
+      }
+
+    })
     
     return(
 
-        <View>
-            <Text>Home screen</Text>
+        <View style={styles.container}>
+            <Image style={styles.Logo} source={logo}/>
             <TouchableOpacity onPress={goTo}>
-                <View>
-                  <Text>S'inscrire</Text>
+                <View style={styles.bouton1}>
+                  <Text  style={styles.textbout}>INSCRIPTION</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={goToLogin}>
-                <View>
-                  <Text>se connecter</Text>
+                <View  style={styles.bouton2}>
+                  <Text style={styles.textbout}>CONNECTION</Text>
                 </View>
             </TouchableOpacity>
         </View>

@@ -4,11 +4,11 @@
     "slug": "my_snap",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/snapchat.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/snapchat.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFFF00"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

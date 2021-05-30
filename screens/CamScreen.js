@@ -53,7 +53,7 @@ const pickImage = async () => {
     const dataToSend = {
         duration: "1",
         // a changer pou           r 
-        to: "test@hotmail.com",
+        to: "a@gmail.com",
         image: result.uri
     };
     const formData = new FormData();
@@ -96,6 +96,9 @@ const pickImage = async () => {
     MediaLibrary.saveToLibraryAsync(IMG),
     console.log('photo', IMG);
   }
+  const share =async()=>{
+    props.navigation.navigate("User");
+  }
 
   //pour la permission
 
@@ -136,6 +139,9 @@ const pickImage = async () => {
     },
     text: {
       color: '#fff'
+    },
+    share:{
+      top:600,
     },
       //css qui permet de faire facecamera
       galery:{
@@ -210,6 +216,8 @@ const pickImage = async () => {
                 <MaterialIcons name='save' size={28} color='white'style={styles.save}
       onPress={save}
       />
+       <MaterialIcons name='share' size={28} color='white' style={styles.share}
+      onPress={share}/>
                 </TouchableOpacity>
                 
                 
